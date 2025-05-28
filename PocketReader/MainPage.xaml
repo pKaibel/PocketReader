@@ -1,66 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PocketReader.MainPage"
-             xmlns:viewmodels="clr-namespace:SwiftLernApp.ViewModels"
-             xmlns:models="clr-namespace:SwiftLernApp.Models" 
-             x:DataType="viewmodels:BookmarkViewModel" 
-             Title="Pocket Reader by PhilKa"
-             IconImageSource="swift_logo.png" >
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             x:Class="PocketReader.MainPage"  
+             xmlns:viewmodels="clr-namespace:PocketReader.ViewModels"  
+             xmlns:models="clr-namespace:PocketReader.Models"  
+             Title="Pocket Reader by PhilKa"  
+             IconImageSource="app_logo.png">  
 
-    <!-- Binding to the ViewModel -->
-    <ContentPage.BindingContext>
-        <viewmodels:TopicViewModel />
+    <!-- Binding to the ViewModel -->  
+    <ContentPage.BindingContext>  
+        <viewmodels:BookmarkViewModel />  
     </ContentPage.BindingContext>
 
-    <!-- This is the main page of the Swift Lern App. It displays a welcome message, a logo, and a list of topics for learning Swift. -->
+
+    <!-- Toolbar-Button "ADD" -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+              IconImageSource="add_circle.png"
+              Clicked="OnItemAdded"/>
+    </ContentPage.ToolbarItems>
+
+    <!-- This is the main page of the Swift Lern App. It displays a welcome message, a logo, and a list of topics for learning Swift. -->  
     <ListView   
         Margin="20"  
-        x:Name="TopicListView"
-        ItemsSource="{Binding Topics}"
-        ItemSelected="OnItemSelected">
+        x:Name="BookmarkListView"  
+        ItemsSource="{Binding Bookmarks}"  
+        ItemSelected="OnItemSelected"
+        HasUnevenRows="True">  
 
-        <!-- Header of the ListView with a welcome message and logo -->
-        <ListView.Header>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Border Background="#2f5cb6"/>
-                <Border Grid.Column ="1" Background="#1f3d7a"/>
-                <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
+        <!-- Header of the ListView with a welcome message and logo -->  
+        <ListView.Header>  
+            <Grid>  
+                <Grid.ColumnDefinitions>  
+                    <ColumnDefinition Width="3*"/>  
+                    <ColumnDefinition Width="5*"/>  
+                </Grid.ColumnDefinitions>  
+                <Grid.RowDefinitions>  
+                    <RowDefinition Height="2*"/>  
+                    <RowDefinition Height="*"/>  
+                </Grid.RowDefinitions>  
+                <Border Background="White"/>  
+                <Border Grid.Column ="1" Background="#004aad"/>  
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#ffbb59"/>  
                 <Image   
                     Grid.Row="0" Grid.Column="0"  
-                    Source="swift_logo.png"  
-                    WidthRequest="100" 
-                    HeightRequest="100"
-                    Aspect="AspectFit"
-                    Margin="15"/>
-                <controls:StackLayout Grid.Column="1" Margin="20,0,0,0" VerticalOptions="Center">
-                    <Label Text="Welcome," TextColor="White" FontSize="Large"/>
-                    <Label Text="this App helps you" TextColor="White" FontSize="Large"/>
-                    <Label Text="to learn Swift" TextColor="White" FontSize="Large"/>
-                </controls:StackLayout>
-                <controls:StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal"    
-                    HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="Select a topic to learn more:"   
-                        TextColor="White" FontSize="Medium" Margin="0,0,20,0"/>
-                </controls:StackLayout>
-            </Grid>
-        </ListView.Header>
+                    Source="app_logo.png"                 
+                    Aspect="AspectFill"  
+                    />  
+                <StackLayout Grid.Column="1" Margin="20,0,0,0" VerticalOptions="Center">  
+                    <Label Text="Welcome," TextColor="White" FontSize="Large"/>  
+                    <Label Text="this App helps you" TextColor="White" FontSize="Large"/>  
+                    <Label Text="managed all your Bookmarks" TextColor="White" FontSize="Large"/>  
+                </StackLayout>  
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal"    
+                    HorizontalOptions="Center" VerticalOptions="Center">  
+                    <Label Text="Hier sind alle deine Links:"   
+                        TextColor="White" FontSize="Medium" Margin="0,0,20,0"/>  
+                </StackLayout>  
+            </Grid>  
+        </ListView.Header>  
 
-        <!-- ItemTemplate for the ListView to display each topic -->
+        <!-- ItemTemplate for the ListView to display each bookmark -->  
         <ListView.ItemTemplate>
-            <DataTemplate x:DataType="models:Topic">
-                <TextCell Text="{Binding Title}" />
-            </DataTemplate>
-        </ListView.ItemTemplate>
+            <DataTemplate x:DataType="models:Bookmark">
+                <ViewCell>
+                    <VerticalStackLayout
+                        Spacing="10"
+                        Margin="10">
+                    
+                        <!-- Zeile 1 -->
+                        <HorizontalStackLayout
+                            Margin="5"
+                            Spacing="5"
+                            BackgroundColor="AntiqueWhite">
 
-    </ListView>
+                          <Label Text="{Binding Title}" 
+                                TextColor="Black"
+                                FontAttributes="Bold" />
+                        
+                        </HorizontalStackLayout>
+                    
+                        <!-- Zeile 2 -->
+                        <HorizontalStackLayout
+                            Margin="5"
+                            Spacing="5">
+                        
+                            <Label Text="{Binding Url}" 
+                                TextColor="Gray" />
+                        
+                        </HorizontalStackLayout>
+                    
+                    </VerticalStackLayout>
+                </ViewCell>
+            </DataTemplate>  
+        </ListView.ItemTemplate>  
+
+    </ListView>  
 
 </ContentPage>

@@ -42,8 +42,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<!-- App Icon -->		
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />		
+		<MauiIcon Include="Resources\AppIcon\app_icon.png" />		
+
+		<!-- App Icons for In-App-user -->
+		<MauiImage Include="Resources\AppIcon\add_circle.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</MauiImage>		
+		<MauiImage Include="Resources\AppIcon\app_logo.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -60,14 +67,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\add_circle.png" />
+	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Resources\AppIcon\app_icon.png" />
+	  <None Remove="Resources\AppIcon\app_logo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\BookmarkViewPage.xaml.cs">
+	    <DependentUpon>BookmarkViewPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiAsset Update="Resources\Raw\data.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </MauiAsset>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\BookmarkViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

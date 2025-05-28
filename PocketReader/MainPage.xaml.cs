@@ -1,24 +1,36 @@
-﻿namespace PocketReader
+﻿using PocketReader.Models;
+using PocketReader.Views;
+
+namespace PocketReader
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
+        // Constructor for the MainPage class
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        // Auf die Auswahl eines Listenelements reagieren
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            count++;
+            if (e.SelectedItem == null)
+                return;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            var selectedItem = e.SelectedItem as Bookmark;
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // Navigation zur Detail-Seite
+            var bookmarkPage = new BookmarkViewPage(selectedItem);
+            await Navigation.PushAsync(bookmarkPage);
+
+            // Selection zurücksetzen
+            ((ListView)sender).SelectedItem = null;
+        }
+
+        // Auf das Hinzufügen eines neuen Bookmarks reagieren
+        private void OnItemAdded(object sender, EventArgs e)
+        {
+            
         }
     }
 }

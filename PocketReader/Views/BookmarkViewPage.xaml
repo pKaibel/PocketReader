@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketReader.Views.BookmarkViewPage"
+             Title="{Binding Title}">
+    
+    <!-- Main View Conatiner -->
+    <ScrollView>
+        <VerticalStackLayout
+            Margin="20"
+            Spacing="20">
+            
+            <!-- Titel anzeigen -->
+            <Label 
+                Text="Titel"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontAttributes="Bold"/>
+            <Label x:Name="TitleLabel" Text="{Binding Title}" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+
+            <!-- Url anzeigen -->
+            <Label 
+                Text="URL"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontAttributes="Bold"/>
+            <Button x:Name="UrlButton" 
+                   Text="{Binding Url}" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   FontFamily="monospace"
+                   TextColor="Purple" 
+                   BackgroundColor="white"
+                   Padding="10"
+                   Clicked="OnUrlButtonClicked" 
+                   />
+
+            <!-- Time Added anzeigen -->
+            <Label 
+                Text="Hinzugefügt am"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontAttributes="Bold"/>
+            <Label x:Name="TimeAddedLabel" Text="{Binding TimeAdded}" 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+
+            <!-- Tags anzeigen -->
+            <Label 
+                Text="Tags"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontAttributes="Bold"/>
+            <Label x:Name="TagsLabel" Text="{Binding Tags}" 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+
+            <!-- Reading Status anzeigen -->
+            <Label 
+                Text="Lesestatus"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontAttributes="Bold"/>
+            <Label x:Name="StatusLabel" Text="{Binding Status}" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>
